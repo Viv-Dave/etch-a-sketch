@@ -1,21 +1,49 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    function multiplyDivs(numberOfDivs) {
-      const container = document.getElementById('container');
-      container.style.gridTemplateColumns = `repeat(${numberOfDivs}, 100px)`; // Set the grid columns
-  
-      for (var i = 0; i < numberOfDivs; i++) {
-        for (var j = 0; j < numberOfDivs; j++) {
-          var newDiv = document.createElement("div");
-          newDiv.className = "my-div";
-          container.appendChild(newDiv);
-        }
-      }
-    }
-  
-    multiplyDivs(16); 
-    document.addEventListener('click', function() {
-        const divs = document.querySelector('.my-div'); // Select all divs with class "my-div"
-            div.style.backgroundColor = "#0000ff"; // Change the color for each div
-        });
-    });
+document.addEventListener("DOMContentLoaded", function() {
+  const container = document.getElementById('container');
+  const greenbtn = document.getElementById('greenbtn');
+  const bluebtn = document.getElementById('bluebtn');
+  const redbtn = document.getElementById('redbtn');
+  const whitebtn = document.getElementById('whitebtn');
+  const blackbtn = document.getElementById('blackbtn');
+  const yellowbtn = document.getElementById('yellowbtn');
+  let setColor = '';
+
+  createGrid(8, 8);
+
+  greenbtn.addEventListener('click', function () {
+      setColor = "green";
   });
+
+  bluebtn.addEventListener('click', function () {
+      setColor = "blue";
+  });
+
+  redbtn.addEventListener('click', function () {
+      setColor = "red";
+  });
+  whitebtn.addEventListener('click', function() {
+      setColor = "white";
+  });
+  blackbtn.addEventListener('click', function() {
+      setColor = "black";
+  });
+  yellowbtn.addEventListener('click', function() {
+      setColor = "yellow";
+  })
+
+  container.addEventListener('click', function(event) {
+      if (event.target.classList.contains('grid-item')) {
+          event.target.style.backgroundColor = setColor;
+      }
+  });
+
+  function createGrid(rows, cols) {
+      container.innerHTML = '';
+
+      for (let i = 0; i < rows * cols; i++) {
+          const gridItem = document.createElement('div');
+          gridItem.classList.add('grid-item');
+          container.appendChild(gridItem);
+      }
+  }
+});
